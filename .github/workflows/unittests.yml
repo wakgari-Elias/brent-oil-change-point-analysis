@@ -1,0 +1,65 @@
+name: Task 1 Unit Tests
+
+on:
+  push:
+    branches: [main, task-1]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-task-1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify raw Brent oil dataset exists
+        run: |
+          if [ ! -f data/raw/BrentOilPrices.csv ]; then
+            echo "❌ BrentOilPrices.csv not found"
+            exit 1
+          fi
+          echo "✅ Raw dataset found"
+
+      - name: Verify event dataset exists and is valid
+        run: |
+          python - <<EOF
+          import pandas as pd
+          from pathlib import Path
+
+          path = Path("data/events/oil_market_events.csv")
+          if not path.exists():
+              raise FileNotFoundError("oil_market_events.csv not found")
+
+          df = pd.read_csv(path)
+
+          if df.shape[0] < 15:
+              raise ValueError("Event dataset must contain at least 15 events")
+
+          if not {"date", "event"}.issubset(df.columns):
+              raise ValueError("Event dataset must contain 'date' and 'event' columns")
+
+          print("✅ Event dataset validation passed")
+          EOF
+
+      - name: Verify Task 1 EDA notebook exists
+        run: |
+          if [ ! -f notebooks/task1_initial_eda.ipynb ]; then
+            echo "❌ EDA notebook not found"
+            exit 1
+          fi
+          echo "✅ EDA notebook found"
+
+      - name: Task 1 checks completed
+        run: echo "🎉 All Task 1 validations passed"
