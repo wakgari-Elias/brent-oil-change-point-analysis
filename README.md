@@ -134,3 +134,163 @@ Interactive dashboards for stakeholder communication
 Author
 
 Prepared for data science analysis and policy-focused insight generation.
+
+Task 2 — Bayesian Change Point Analysis of Brent Oil Prices
+Overview
+
+This task applies Bayesian Change Point Analysis to historical Brent crude oil prices in order to identify structural breaks in the time series. These change points represent moments where the statistical properties of oil prices (such as the mean level) shift significantly, often due to major geopolitical, economic, or supply–demand events.
+
+The analysis uses a probabilistic Bayesian framework implemented in PyMC, allowing uncertainty to be explicitly modeled and quantified rather than relying on fixed deterministic breakpoints.
+
+Objective
+
+The main goals of Task 2 are:
+
+Detect one or more structural change points in Brent oil prices
+
+Estimate price regimes before and after the change point
+
+Quantify uncertainty in the timing and magnitude of changes
+
+Provide an interpretable statistical foundation for linking price shifts to real-world events
+
+This approach improves on simple visual inspection or classical break tests by producing posterior distributions instead of single-point estimates.
+
+Dataset
+
+Source file: BrentOilPrices.csv
+
+Key columns:
+
+Date — observation date
+
+Price — Brent crude oil price (USD)
+
+Preprocessing Steps
+
+Converted Date to datetime format
+
+Sorted observations chronologically
+
+Removed missing or invalid values
+
+Indexed prices for time-series modeling
+
+Methodology
+Bayesian Change Point Model
+
+The model assumes that oil prices follow two distinct regimes:
+
+A pre-change regime with mean μ₁
+
+A post-change regime with mean μ₂
+
+A latent change point τ that separates the two regimes
+
+Formally:
+
+Prices before τ are drawn from Normal(μ₁, σ)
+
+Prices after τ are drawn from Normal(μ₂, σ)
+
+The change point τ is treated as a random variable with a discrete prior
+
+This structure allows the model to infer:
+
+When the change occurred
+
+How large the shift in price level was
+
+How uncertain those estimates are
+
+Inference & Sampling
+
+Framework: PyMC (Bayesian probabilistic programming)
+
+Sampling method:
+
+NUTS (No-U-Turn Sampler) for continuous parameters
+
+Metropolis step for the discrete change point
+
+Configuration:
+
+draws = 2000
+
+tune = 1000
+
+chains = 4
+
+target_accept = 0.9
+
+The model was sampled using MCMC, and convergence was assessed through:
+
+Trace plots
+
+Effective sample sizes
+
+Absence of divergent transitions
+
+Outputs
+
+The analysis produces:
+
+Posterior distribution of the change point location
+
+Estimated means before and after the change
+
+Credible intervals capturing uncertainty
+
+Diagnostics confirming stable sampling behavior
+
+These outputs allow interpretation of both timing and magnitude of regime shifts rather than relying on a single deterministic breakpoint.
+
+Interpretation
+
+The detected change point corresponds to a statistically meaningful shift in Brent oil price behavior. Such shifts often align with:
+
+Global geopolitical shocks
+
+Oil supply disruptions
+
+Financial crises
+
+Major policy or production changes
+
+Because the model is Bayesian, results should be interpreted probabilistically, not as exact dates.
+
+Limitations
+
+The model assumes a single dominant change point
+
+Variance is assumed constant across regimes
+
+External explanatory variables are not directly included
+
+Results are associative, not causal
+
+These limitations are acknowledged and addressed conceptually in future extensions.
+
+Future Work (Optional Extensions)
+
+Potential improvements include:
+
+Incorporating macroeconomic variables such as GDP, inflation, or exchange rates
+
+Extending to multiple change points
+
+Applying Markov-Switching models to explicitly model calm vs volatile regimes
+
+Using VAR models to study dynamic interactions between oil prices and economic indicators
+
+Project Structure (Relevant Files)
+.
+├── data/
+│   └── BrentOilPrices.csv
+├── notebooks/
+│   └── task2_change_point_analysis.ipynb
+├── README.md
+
+Key Takeaway
+
+This task demonstrates how Bayesian change point modeling can uncover meaningful structural breaks in oil prices while explicitly accounting for uncertainty — a critical advantage when analyzing volatile economic time series.

@@ -3,3 +3,11 @@ numpy
 matplotlib
 seaborn
 statsmodels
+numpy 
+pandas 
+matplotlib 
+seaborn 
+pymc 
+arviz 
+scipy 
+jupyter
