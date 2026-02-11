@@ -330,3 +330,98 @@ This task demonstrates how Bayesian change point modeling can uncover meaningful
 
 ### Drill-down Example
 ![Drill-down Example](screenshots/drilldown_example.png)
+
+Running the Full Dashboard (Backend + Frontend)
+📦 Prerequisites
+
+Python 3.10+
+
+Node.js 18+
+
+npm
+
+Virtual environment (venv)
+
+🔹 Step 1: Start Backend (Flask)
+1. Navigate to backend folder
+cd backend
+
+2. Activate virtual environment
+
+Windows:
+
+venv\Scripts\activate
+
+
+Mac/Linux:
+
+source venv/bin/activate
+
+3. Install dependencies
+pip install -r requirements.txt
+
+4. Run Flask server
+python app.py
+
+
+You should see:
+
+Running on http://127.0.0.1:5000
+
+
+Backend is now running.
+
+🔹 Step 2: Start Frontend (React)
+
+Open a new terminal (keep backend running).
+
+1. Navigate to project root
+cd ..
+
+2. Install frontend dependencies (if not installed)
+npm install
+
+3. Start React app
+npm start
+
+
+Frontend runs at:
+
+http://localhost:3000
+
+🔹 Important
+
+Backend must run on:
+
+http://127.0.0.1:5000
+
+
+Frontend must run on:
+
+http://localhost:3000
+
+
+Both must be running at the same time.
+
+## 📊 Dashboard Screenshots
+
+### 🔹 Dashboard Overview
+![Overview](screenshots/dashboard_overview.png)
+
+### 🔹 Date Filtering
+![Filtering](screenshots/date_filtering.png)
+
+### 🔹 Event Highlight
+![Event Highlight](screenshots/event_highlight.png)
+
+### 🔹 Responsive Design
+
+Desktop:
+![Desktop](screenshots/desktop_view.png)
+
+Tablet:
+![Tablet](screenshots/tablet_view.png)
+
+Mobile:
+![Mobile](screenshots/mobile_view.png)
+
