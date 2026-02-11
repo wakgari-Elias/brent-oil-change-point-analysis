@@ -294,3 +294,39 @@ Project Structure (Relevant Files)
 Key Takeaway
 
 This task demonstrates how Bayesian change point modeling can uncover meaningful structural breaks in oil prices while explicitly accounting for uncertainty — a critical advantage when analyzing volatile economic time series.
+
+# Brent Oil Prices Dashboard
+
+## Setup
+
+### Backend
+1. Activate venv: `source venv/Scripts/activate`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Run server: `python app.py`
+4. API endpoints:
+   - `/api/prices/`
+   - `/api/changepoints/`
+   - `/api/events/`
+
+### Frontend
+1. `cd src`
+2. Install dependencies: `npm install`
+3. Run app: `npm start`
+4. Open `http://localhost:3000`
+
+### Features
+- Interactive price chart
+- Change point visualization
+- Event overlay with highlights
+- Date range filter
+- Key indicators: average price & volatility
+## Dashboard Screenshots
+
+### Overview
+![Dashboard Overview](screenshots/dashboard_overview.png)
+
+### Event Highlight
+![Event Highlight](screenshots/event_highlight.png)
+
+### Drill-down Example
+![Drill-down Example](screenshots/drilldown_example.png)

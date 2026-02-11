@@ -11,3 +11,7 @@ pymc
 arviz 
 scipy 
 jupyter
+flask 
+flask-cors 
+pandas 
+numpy
